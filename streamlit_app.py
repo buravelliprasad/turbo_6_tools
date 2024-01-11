@@ -212,54 +212,54 @@ tool3 = create_retriever_tool(
 #         return car_details
 
 
-# class CarDetails(BaseModel):
-#     make: str
-#     model: str
-#     year: int
+class CarDetails(BaseModel):
+    make: str
+    model: str
+    year: int
 
-# class VINDetails(BaseModel):
-#     vin: str = Field(..., description="VIN of the car to get the car details")
+class VINDetails(BaseModel):
+    vin: str = Field(..., description="VIN of the car to get the car details")
 
-# @tool(args_schema=VINDetails)
-# def get_car_details_from_vin(vin):
-#     """Fetch car details for the given VIN."""
+@tool
+def get_car_details_from_vin(vin):
+    """Fetch car details for the given VIN."""
     
-#     BASE_URL = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json"
-# #     BASE_URL = "https://fe9b-2405-201-200a-100d-b840-86ed-9ebd-a606.ngrok-free.app/appointment/"
-#     # Make the request
-#     response = requests.get(BASE_URL)
-# #     print(response)
-#     # Check if the request was successful
-#     if response.status_code == 200:
-#         # Parse the JSON response
-#         result = response.json()
-#         print(result)
+    BASE_URL = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json"
+#     BASE_URL = "https://fe9b-2405-201-200a-100d-b840-86ed-9ebd-a606.ngrok-free.app/appointment/"
+    # Make the request
+    response = requests.get(BASE_URL)
+#     print(response)
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the JSON response
+        result = response.json()
+        print(result)
         
-#         # Check if 'Results' key is present and has at least one item
-#         if 'Results' in result and result['Results']:
-#             # Extract the first item from 'Results' list
-#             first_result = result['Results'][0]
-# #             print("These are first_result")
-# #             print(first_result)
+        # Check if 'Results' key is present and has at least one item
+        if 'Results' in result and result['Results']:
+            # Extract the first item from 'Results' list
+            first_result = result['Results'][0]
+#             print("These are first_result")
+#             print(first_result)
             
-#             make = first_result.get('Make', '')
-#             model = first_result.get('Model', '')
+            make = first_result.get('Make', '')
+            model = first_result.get('Model', '')
             
-#             try:
-#                 year = int(first_result.get('ModelYear', ''))
-#             except ValueError:
-#                 year = 0  # Handle the case where the year is not a valid integer
+            try:
+                year = int(first_result.get('ModelYear', ''))
+            except ValueError:
+                year = 0  # Handle the case where the year is not a valid integer
         
-#             # Create CarDetails instance
-#             car_details = CarDetails(make=make, model=model, year=year)
-#         else:
-#             # Handle the case when 'Results' key is not present or is empty
-#             car_details = CarDetails(make="", model="", year=0)
+            # Create CarDetails instance
+            car_details = CarDetails(make=make, model=model, year=year)
+        else:
+            # Handle the case when 'Results' key is not present or is empty
+            car_details = CarDetails(make="", model="", year=0)
         
-#         return car_details
-#     else:
-#         # Handle the case when the request was not successful
-#         return CarDetails(make="", model="", year=0)
+        return car_details
+    else:
+        # Handle the case when the request was not successful
+        return CarDetails(make="", model="", year=0)
 
 class AppointmentDetails(BaseModel):
     time: str
