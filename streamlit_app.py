@@ -157,7 +157,6 @@ tool3 = create_retriever_tool(
      "Searches and returns documents related to business working days and hours, location and address details."
 )
 
-
 class CarDetails(BaseModel):
     make: str
     model: str
@@ -168,25 +167,22 @@ class VINDetails(BaseModel):
 
 @tool(args_schema=VINDetails)
 def get_car_details_from_vin(vin):
-    """Fetch car details for the given VPN."""
+    """Fetch car details for the given VIN."""
     
     BASE_URL = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json"
-#     BASE_URL = "https://fe9b-2405-201-200a-100d-b840-86ed-9ebd-a606.ngrok-free.app/appointment/"
+    
     # Make the request
     response = requests.get(BASE_URL)
-#     print(response)
+    
     # Check if the request was successful
     if response.status_code == 200:
         # Parse the JSON response
         result = response.json()
-        print(result)
         
         # Check if 'Results' key is present and has at least one item
         if 'Results' in result and result['Results']:
             # Extract the first item from 'Results' list
             first_result = result['Results'][0]
-#             print("These are first_result")
-#             print(first_result)
             
             make = first_result.get('Make', '')
             model = first_result.get('Model', '')
@@ -198,14 +194,72 @@ def get_car_details_from_vin(vin):
         
             # Create CarDetails instance
             car_details = CarDetails(make=make, model=model, year=year)
+            
+            # Print the details for debugging
+            print("Car Details:")
+            print(f"Make: {car_details.make}, Model: {car_details.model}, Year: {car_details.year}")
         else:
             # Handle the case when 'Results' key is not present or is empty
             car_details = CarDetails(make="", model="", year=0)
+            print("No results found for the given VIN.")
         
         return car_details
     else:
         # Handle the case when the request was not successful
-        return CarDetails(make="", model="", year=0)
+        car_details = CarDetails(make="", model="", year=0)
+        print(f"Failed to retrieve car details. Status code: {response.status_code}")
+        
+        return car_details
+
+
+# class CarDetails(BaseModel):
+#     make: str
+#     model: str
+#     year: int
+
+# class VINDetails(BaseModel):
+#     vin: str = Field(..., description="VIN of the car to get the car details")
+
+# @tool(args_schema=VINDetails)
+# def get_car_details_from_vin(vin):
+#     """Fetch car details for the given VIN."""
+    
+#     BASE_URL = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json"
+# #     BASE_URL = "https://fe9b-2405-201-200a-100d-b840-86ed-9ebd-a606.ngrok-free.app/appointment/"
+#     # Make the request
+#     response = requests.get(BASE_URL)
+# #     print(response)
+#     # Check if the request was successful
+#     if response.status_code == 200:
+#         # Parse the JSON response
+#         result = response.json()
+#         print(result)
+        
+#         # Check if 'Results' key is present and has at least one item
+#         if 'Results' in result and result['Results']:
+#             # Extract the first item from 'Results' list
+#             first_result = result['Results'][0]
+# #             print("These are first_result")
+# #             print(first_result)
+            
+#             make = first_result.get('Make', '')
+#             model = first_result.get('Model', '')
+            
+#             try:
+#                 year = int(first_result.get('ModelYear', ''))
+#             except ValueError:
+#                 year = 0  # Handle the case where the year is not a valid integer
+        
+#             # Create CarDetails instance
+#             car_details = CarDetails(make=make, model=model, year=year)
+#         else:
+#             # Handle the case when 'Results' key is not present or is empty
+#             car_details = CarDetails(make="", model="", year=0)
+        
+#         return car_details
+#     else:
+#         # Handle the case when the request was not successful
+#         return CarDetails(make="", model="", year=0)
 
 class AppointmentDetails(BaseModel):
     time: str
@@ -270,10 +324,10 @@ class CustomerDataStore(BaseModel):
     description:str=Field(..., description="one line about description about visit,")
 # Uncomment if you want to use the decorator
 @tool(args_schema=CustomerDataStore)
-# def store_appointment_data(name: str,phone: str,email: str ,make: str,model: str,year:int,
-#                            company_id:int,location_id:int,start_date:str,appointment_timezone:str,
-#                            intent:str,summary:str,description:str) -> dict:
-def store_appointment_data(data: CustomerDataStore) -> dict:
+def store_appointment_data(name: str,phone: str,email: str ,make: str,model: str,year:int,
+                           company_id:int,location_id:int,start_date:str,appointment_timezone:str,
+                           intent:str,summary:str,description:str) -> dict:
+# def store_appointment_data(data: CustomerDataStore) -> dict:
 
     """Store appointment data using an API."""
 #     print(data)
