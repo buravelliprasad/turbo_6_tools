@@ -58,7 +58,11 @@ from langchain.prompts import MessagesPlaceholder
 from langchain.agents import AgentExecutor
 from langchain.smith import RunEvalConfig, run_on_dataset
 import pandas as pd
-
+import requests
+from pydantic import BaseModel, Field
+from langchain.tools import tool
+from datetime import datetime
+from typing import Dict, Any
 hide_share_button_style = """
     <style>
     .st-emotion-cache-zq5wmm.ezrtsby0 .stActionButton:nth-child(1) {
@@ -152,10 +156,7 @@ tool3 = create_retriever_tool(
      "business_details",
      "Searches and returns documents related to business working days and hours, location and address details."
 )
-import requests
-from pydantic import BaseModel, Field
-from typing import Dict
-from langchain.tools import tool
+
 
 class CarDetails(BaseModel):
     make: str
@@ -205,10 +206,6 @@ def get_car_details_from_vin(vin):
     else:
         # Handle the case when the request was not successful
         return CarDetails(make="", model="", year=0)
-import requests
-from datetime import datetime
-from pydantic import BaseModel, Field
-from langchain.tools import tool
 
 class AppointmentDetails(BaseModel):
     time: str
@@ -255,9 +252,7 @@ def get_appointment_details(date):
         # Handle the case when the request was not successful
         return []
 
-import requests
-from pydantic import BaseModel, Field
-from typing import Dict, Any
+
 
 class CustomerDataStore(BaseModel):
     name: str = Field(..., description="name of the customer")
@@ -343,6 +338,7 @@ llm = ChatOpenAI(model="gpt-4-1106-preview", temperature = 0)
 langchain.debug=True
 
 memory_key="chat_history"
+memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 template = """You are an costumer care support exectutive baesd on your performance you will get bonus and incentives 
 so follow instructions strictly and respond in Personable, Humorous, emotional intelligent, creative, witty and engaging.
 The name of the costumer is {name} and the dealership name is {dealership_name} and 
@@ -450,7 +446,7 @@ prompt = OpenAIFunctionsAgent.create_prompt(
     system_message=system_message,
     extra_prompt_messages=[MessagesPlaceholder(variable_name=memory_key)]
 )
-tools = [tool1,tool2,tool3,get_car_details_from_vin,get_appointment_details,get_current_temperature,store_appointment_data]
+tools = [tool1,tool2,tool3,get_car_details_from_vin,get_appointment_details,store_appointment_data]
 agent = OpenAIFunctionsAgent(llm=llm, tools=tools, prompt=prompt)
 if 'agent_executor' not in st.session_state:
     agent_executor = AgentExecutor(agent=agent, tools=tools, memory=memory, verbose=True, return_source_documents=True,
