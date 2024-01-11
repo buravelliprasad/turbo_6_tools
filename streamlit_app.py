@@ -268,7 +268,7 @@ class AppointmentDetails(BaseModel):
 class AppointmentInput(BaseModel):
     date: str = Field(..., description="Date for which to get appointment details")
 
-@tool(args_schema=AppointmentInput)
+@tool
 def get_appointment_details(date):
     """Fetch appointment details for the given date and input to this function should be only "mm-dd-yyyy," format\
     such as "04-12-2024" not "date":"mm-dd-yyyy" format."""
