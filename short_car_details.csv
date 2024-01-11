@@ -1,0 +1,41 @@
+year,make,model,is_new
+2023,Chevrolet,Silverado 1500,TRUE
+2023,Chevrolet,Blazer,TRUE
+2018,Chevrolet,Malibu,FALSE
+2020,Chevrolet,Bolt EV,FALSE
+2020,Chevrolet,Trax,FALSE
+2020,Chevrolet,Traverse,FALSE
+2021,Chevrolet,Tahoe,FALSE
+2022,Chevrolet,Camaro,FALSE
+2023,Chevrolet,Silverado 2500HD,FALSE
+2023,Chevrolet,Traverse,FALSE
+2020,GMC,Terrain,FALSE
+2021,Chevrolet,Equinox,FALSE
+2020,Chevrolet,Silverado 1500,FALSE
+2020,Chevrolet,Impala,FALSE
+2021,Chevrolet,Trailblazer,FALSE
+2022,Nissan,Pathfinder,FALSE
+2023,Chevrolet,Tahoe,TRUE
+2020,Chevrolet,Colorado,FALSE
+2023,Chevrolet,Equinox,TRUE
+2023,Chevrolet,Trailblazer,TRUE
+2020,Nissan,Maxima,FALSE
+2023,Chevrolet,Traverse,TRUE
+2020,Chevrolet,Malibu,FALSE
+2019,Chevrolet,Silverado 1500,FALSE
+2017,Honda,Civic Hatchback,FALSE
+2022,Hyundai,Santa Fe,FALSE
+2024,Chevrolet,Trax,TRUE
+2018,Chevrolet,Volt,FALSE
+2020,Tesla,Model 3,FALSE
+2019,Chevrolet,Traverse,FALSE
+2016,Kia,Sorento,FALSE
+2021,Toyota,Tundra 2WD,FALSE
+2021,Honda,CR-V,FALSE
+2023,Chevrolet,Bolt EV,TRUE
+2019,GMC,Acadia,FALSE
+2020,Honda,Civic Sedan,FALSE
+2022,Honda,Civic Sedan,FALSE
+2023,Volkswagen,Atlas Cross Sport,FALSE
+2023,Chevrolet,Colorado,TRUE
+2020,Chevrolet,Camaro,FALSE
