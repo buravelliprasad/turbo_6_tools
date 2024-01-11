@@ -157,59 +157,59 @@ tool3 = create_retriever_tool(
      "Searches and returns documents related to business working days and hours, location and address details."
 )
 
-class CarDetails(BaseModel):
-    make: str
-    model: str
-    year: int
+# class CarDetails(BaseModel):
+#     make: str
+#     model: str
+#     year: int
 
-class VINDetails(BaseModel):
-    vin: str = Field(..., description="VIN of the car to get the car details")
+# class VINDetails(BaseModel):
+#     vin: str = Field(..., description="VIN of the car to get the car details")
 
-@tool(args_schema=VINDetails)
-def get_car_details_from_vin(vin):
-    """Fetch car details for the given VIN."""
+# @tool(args_schema=VINDetails)
+# def get_car_details_from_vin(vin):
+#     """Fetch car details for the given VIN."""
     
-    BASE_URL = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json"
+#     BASE_URL = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json"
     
-    # Make the request
-    response = requests.get(BASE_URL)
+#     # Make the request
+#     response = requests.get(BASE_URL)
     
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Parse the JSON response
-        result = response.json()
+#     # Check if the request was successful
+#     if response.status_code == 200:
+#         # Parse the JSON response
+#         result = response.json()
         
-        # Check if 'Results' key is present and has at least one item
-        if 'Results' in result and result['Results']:
-            # Extract the first item from 'Results' list
-            first_result = result['Results'][0]
+#         # Check if 'Results' key is present and has at least one item
+#         if 'Results' in result and result['Results']:
+#             # Extract the first item from 'Results' list
+#             first_result = result['Results'][0]
             
-            make = first_result.get('Make', '')
-            model = first_result.get('Model', '')
+#             make = first_result.get('Make', '')
+#             model = first_result.get('Model', '')
             
-            try:
-                year = int(first_result.get('ModelYear', ''))
-            except ValueError:
-                year = 0  # Handle the case where the year is not a valid integer
+#             try:
+#                 year = int(first_result.get('ModelYear', ''))
+#             except ValueError:
+#                 year = 0  # Handle the case where the year is not a valid integer
         
-            # Create CarDetails instance
-            car_details = CarDetails(make=make, model=model, year=year)
+#             # Create CarDetails instance
+#             car_details = CarDetails(make=make, model=model, year=year)
             
-            # Print the details for debugging
-            print("Car Details:")
-            print(f"Make: {car_details.make}, Model: {car_details.model}, Year: {car_details.year}")
-        else:
-            # Handle the case when 'Results' key is not present or is empty
-            car_details = CarDetails(make="", model="", year=0)
-            print("No results found for the given VIN.")
+#             # Print the details for debugging
+#             print("Car Details:")
+#             print(f"Make: {car_details.make}, Model: {car_details.model}, Year: {car_details.year}")
+#         else:
+#             # Handle the case when 'Results' key is not present or is empty
+#             car_details = CarDetails(make="", model="", year=0)
+#             print("No results found for the given VIN.")
         
-        return car_details
-    else:
-        # Handle the case when the request was not successful
-        car_details = CarDetails(make="", model="", year=0)
-        print(f"Failed to retrieve car details. Status code: {response.status_code}")
+#         return car_details
+#     else:
+#         # Handle the case when the request was not successful
+#         car_details = CarDetails(make="", model="", year=0)
+#         print(f"Failed to retrieve car details. Status code: {response.status_code}")
         
-        return car_details
+#         return car_details
 
 
 # class CarDetails(BaseModel):
