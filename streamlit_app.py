@@ -323,7 +323,7 @@ class CustomerDataStore(BaseModel):
     summary:str=Field(..., description="one line about summary of appointment,")
     description:str=Field(..., description="one line about description about visit,")
 # Uncomment if you want to use the decorator
-@tool(args_schema=CustomerDataStore)
+@tool
 def store_appointment_data(name: str,phone: str,email: str ,make: str,model: str,year:int,
                            company_id:int,location_id:int,start_date:str,appointment_timezone:str,
                            intent:str,summary:str,description:str) -> dict:
