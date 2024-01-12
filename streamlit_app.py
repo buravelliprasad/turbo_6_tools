@@ -120,6 +120,7 @@ business_details_text = [
     "Phone: (555) 123-4567",
     "Address: 567 Oak Avenue, Anytown, CA 98765, Email: jessica.smith@example.com",
     "dealer ship location: https://maps.app.goo.gl/ecHtb6y5f8q5PUxb9"
+]
 retriever_3 = FAISS.from_texts(business_details_text, OpenAIEmbeddings()).as_retriever()
 
 file_1 = r'car_desription_new.csv'
