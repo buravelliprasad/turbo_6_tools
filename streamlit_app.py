@@ -372,7 +372,7 @@ def store_appointment_data(name: str,phone: str,email: str ,make: str,model: str
 airtable_api_key = st.secrets["AIRTABLE"]["AIRTABLE_API_KEY"]
 os.environ["AIRTABLE_API_KEY"] = airtable_api_key
 AIRTABLE_BASE_ID = "appN324U6FsVFVmx2"  
-AIRTABLE_TABLE_NAME = "gpt4_turbo_test_2"
+AIRTABLE_TABLE_NAME = "new_apis"
 
 
 st.info("Introducing **Otto**, your cutting-edge partner in streamlining dealership and customer-related operations. At EngagedAi, we specialize in harnessing the power of automation to revolutionize the way dealerships and customers interact. Our advanced solutions seamlessly handle tasks, from managing inventory and customer inquiries to optimizing sales processes, all while enhancing customer satisfaction. Discover a new era of efficiency and convenience with us as your trusted automation ally. [engagedai.io](https://funnelai.com/). For this demo application, we will use the Inventory Dataset. Please explore it [here](https://github.com/buravelliprasad/turbo_6_tools/blob/main/car_desription_new.csv) to get a sense for what questions you can ask.")
