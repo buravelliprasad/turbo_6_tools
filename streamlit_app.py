@@ -119,8 +119,7 @@ business_details_text = [
     "working hours: 9 am to 7 pm", 
     "Phone: (555) 123-4567",
     "Address: 567 Oak Avenue, Anytown, CA 98765, Email: jessica.smith@example.com",
-    "dealer ship location: https://www.google.com/maps/place/Pine+Belt+Mazda/@40.0835762,-74.1764688,15.63z/data=!4m6!3m5!1s0x89c18327cdc07665:0x23c38c7d1f0c2940!8m2!3d40.0835242!4d-74.1742558!16s%2Fg%2F11hkd1hhhb?entry=ttu"
-]
+    "dealer ship location: https://maps.app.goo.gl/ecHtb6y5f8q5PUxb9"
 retriever_3 = FAISS.from_texts(business_details_text, OpenAIEmbeddings()).as_retriever()
 
 file_1 = r'car_desription_new.csv'
@@ -375,7 +374,7 @@ AIRTABLE_BASE_ID = "appN324U6FsVFVmx2"
 AIRTABLE_TABLE_NAME = "gpt4_turbo_test_2"
 
 
-st.info("Introducing **Otto**, your cutting-edge partner in streamlining dealership and customer-related operations. At EngagedAi, we specialize in harnessing the power of automation to revolutionize the way dealerships and customers interact. Our advanced solutions seamlessly handle tasks, from managing inventory and customer inquiries to optimizing sales processes, all while enhancing customer satisfaction. Discover a new era of efficiency and convenience with us as your trusted automation ally. [engagedai.io](https://funnelai.com/). For this demo application, we will use the Inventory Dataset. Please explore it [here](https://github.com/ShahVishs/workflow/blob/main/2013_Inventory.csv) to get a sense for what questions you can ask.")
+st.info("Introducing **Otto**, your cutting-edge partner in streamlining dealership and customer-related operations. At EngagedAi, we specialize in harnessing the power of automation to revolutionize the way dealerships and customers interact. Our advanced solutions seamlessly handle tasks, from managing inventory and customer inquiries to optimizing sales processes, all while enhancing customer satisfaction. Discover a new era of efficiency and convenience with us as your trusted automation ally. [engagedai.io](https://funnelai.com/). For this demo application, we will use the Inventory Dataset. Please explore it [here](https://github.com/buravelliprasad/turbo_6_tools/blob/main/car_desription_new.csv) to get a sense for what questions you can ask.")
 
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
