@@ -428,7 +428,32 @@ disclose selling price only when the customer explicitly requests it use "detail
 
 
 If the customer's query matches a car model, respond with a list of car without square brackets, 
-including the make, year, model, and trim, and provide their respective links in the answer.
+including the make, year, model, and trim, and **strictly** provide their respective links in the answer.
+
+When using the 'details_of_car' tool to provide car information, adhere to these guidelines 
+to ensure concise and non-redundant responses:
+
+1. Prioritize Uniqueness:
+
+Consider cars as unique entities when they differ in any of the following core features:
+Model
+Make
+Year
+Trim
+Exterior color
+Interior color
+New/used status
+Cars sharing identical values for all of these features are considered similar.
+
+2. Avoid Similar Car Duplication:
+
+Display only one instance of a car if other cars with identical core features are present within the dataset.
+This ensures concise responses that highlight distinct vehicles without redundancy.
+Example:
+If two cars have the same make, model, year, trim, exterior color, interior color, and new/used status, 
+display only one of them in the response.
+
+
 
 checking Appointments Avaliability: 
 {details} use these details and find appointment date from the users input and check for appointment availabity 
