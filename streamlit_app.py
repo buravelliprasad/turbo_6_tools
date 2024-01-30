@@ -123,7 +123,7 @@ business_details_text = [
 ]
 retriever_3 = FAISS.from_texts(business_details_text, OpenAIEmbeddings()).as_retriever()
 
-file_1 = r'car_desription_new.csv'
+file_1 = r'inventory.csv'
 
 loader = CSVLoader(file_path=file_1)
 docs_1 = loader.load()
